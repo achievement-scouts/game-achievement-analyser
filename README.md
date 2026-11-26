@@ -6,7 +6,7 @@
 - Launch Claude
 
 ## Setup
-### Filesystem installation
+### Filesystem installation**
 - Click "Plugins" in the top-right
 - Type "Filesystem" into the search box
 - Install Filesystem connector
@@ -48,7 +48,7 @@ Given the list of files available in your install directory, use common patterns
 
 - Unity
   - Covers both `Mono` and `il2cpp` compilers
-  - Includes the Utage VN engine built on Unity
+  - Includes the Utage VN framework
 - Unreal Engine 
   - Covers both UE4 and UE5.
   - AES-encrypted `.pak` files supported
@@ -75,7 +75,11 @@ Several other engines have some support but have not been tested across a wide r
 - Flash
 - Artemis
 - Wolf RPG Editor
-- NaniNovel and some similar Unity VN engines
+
+Unity specifically has several different Visual Novel frameworks, with varying degrees of popularity and coverage:
+- Naninovel
+- Utage
+- MinusNGIN
 
 ## Achievement trigger detection
 The skill will look through all of the calls to various Steam API functions to identify any parts of the game code that interact with achievements. It will then analyse the call chain of these functions, and identify any triggers, checks, or requirements that must be met in order for the achievement to be earned.
