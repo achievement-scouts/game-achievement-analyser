@@ -6,7 +6,7 @@
 - Launch Claude
 
 ## Setup
-### Filesystem installation**
+### Filesystem installation
 - Click "Plugins" in the top-right
 - Type "Filesystem" into the search box
 - Install Filesystem connector
