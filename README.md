@@ -48,7 +48,6 @@ Given the list of files available in your install directory, use common patterns
 
 - Unity
   - Covers both `Mono` and `il2cpp` compilers
-  - Includes the Utage VN framework
 - Unreal Engine 
   - Covers both UE4 and UE5.
   - AES-encrypted `.pak` files supported
