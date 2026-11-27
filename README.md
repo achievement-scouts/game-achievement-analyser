@@ -148,9 +148,11 @@ Claude's paid plans offer some functionality that the skill uses by default. We 
 
 Unless you're doing heavy automation of the analysis process, it's very unlikely that you will be able to fully utilise the Max or Ultra plans, and we do not recommend them. Pro is sufficient for almost all use cases, only extremely heavily active scouts are likely to regularly hit its weekly limits.
 
-## Filesize limitations
+### Filesize limitations
 
-Claude can only copy files of less than 400MB in size into its workspace for analysis. This is not a major problem for most games: we don't care about graphical assets, and those account for the vast majority of all files in a game. The actual code and logic we're looking at will never be this large.
+Claude can only copy files below certain size limits into its workspace for analysis. These limitations are **30MB for Free plans and 400MB for Pro plans**.
+
+This is not really a major problem: we don't care about graphical assets, and those account for the vast majority of all of a game's filesize. The actual code and logic we're looking at will very rarely be this large.
 
 However it's very common for games to package all of their code up in the same file as all of their graphical assets, and if Claude is not able to decrypt/decompress these files in-place it may not be able to start the analysis. If this occurs, it should give you a message informing you of the problem, as well as a suggestion for a tool you could use to unpack the file yourself, and then give Claude access to the folder containing that unpacked file (where it can proceed to copy only the small code-related files).
 
