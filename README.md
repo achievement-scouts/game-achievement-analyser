@@ -107,3 +107,56 @@ Most games require substantial mechanical input or are too broad and open to eff
 - Puzzle games
 - Programming games/Zachlikes
 - Linear RPGs
+
+# Limitations
+
+While this tool is incredibly powerful, there are several limitations in what it can do. Some of these limitations only exist on the Free version of Claude, and others are more general.
+
+## Free vs Paid
+Claude comes with four plans for personal use: Free, Pro, Max, and Ultra. Their monthly costs in USD are $0, $20, $100, and $200 respectively. Claude Pro can also be billed at $17/month on a yearly plan.
+
+In each section below we'll look at the differences between the plans in relation to this skill's capabilities and usage. Benefits or differences not relevant to us are not covered.
+
+### Model Quality
+Claude currently offers four model varieties: Haiku, Sonnet, Opus, and Fable. These are listed in ascending order of capabilities.
+
+- **Haiku**: Available in all plans. Intended only for very short tasks, like language classification. This model is not suitable for running this skill.
+- **Sonnet**: Available in all plans. General-purpose model, but struggles on very complex tasks. Can easily guide a basic VN, identify exactly what an achievement's requirements are, or find any dev modes/cheat codes, but may struggle with accurately guiding very long and intricate games with a lot of stats that need to meet triggers at the same time.
+- **Opus**: Available only in paid plans (Pro/Max/Ultra). Opus can fairly reliably complete any gaming-related task you throw at it. It can easily crack encrypted files, write accurate full guides for the most complex dating sims, create solvers for novel puzzle games, make step-by-step pathing for point-and-clicks, and much more. This is the preferred model if you have access to it.
+- **Fable**: Available only in high-tier plans (Max/Ultra), and can only be used for 50% of your weekly usage limits. Fable is designed for very long-form tasks, e.g., software development projects that stretch over months. As most game analyses are single-shot prompts that have runtime measured in minutes, this model is substantially stronger than is necessary for our purposes.
+
+**TL;DR:** Sonnet is okay for a lot of games, but Free users may have difficulty generating fully accurate guides for sufficiently complex games. If you have a paid plan, Opus is preferable.
+
+### Quality of Life features
+Claude's paid plans offer some functionality that the skill uses by default. We have fallbacks for Free plan users, and none of these functionalities are critical, but it will affect the user workflow.
+
+- **Folder access**: If you give it approval, Claude Pro (and higher) can directly access a game's install directory on your device and automatically pull files into its workspace to analyse them. Claude Free cannot do this: it can *view* the folder, but needs you to manually attach files in order to perform real analysis on them. The skill should detect if you are on the Free plan and give you a list of such files.
+- **Browser access**: The skill prefers to guide achievements using the names they're given in the Steam client, but game code typically only contains API names. By default it uses the Claude in-built browser to check this, but this is only available in paid plans. On Claude Free, it will fail and always use API names. This is fine (and sometimes even preferred) as far as Achievement Scouts is concerned, but if you wish to you can work around this in two ways:
+	- Providing a link to the game's achievement list in the form `https://steamcommunity.com/id/{steamuser}/stats/{appid}/?xml=1` and telling it to use WebFetch to get achievement names from this link
+	- Pasting in a JSON file from the Steam API: `https://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2/?appid={appid}&key={apikey}&format=json`
+
+### Usage limits
+
+- **5-hour limits**: All Claude plans except for Ultra have a limit to how much processing you can do in a 5 hour window. These limits vary dynamically based on current service activity levels. On the Free plan you can typically get 2 or 3 simple games processed in each 5 hour window, but sufficiently complex games may take multiple 5-hour limits to complete. Below is an estimation of paid plans usage limits, assuming the model used is Opus 5.5.
+	- **Pro**: ~8-10 games analysed.
+	- **Max**: ~50 games analysed (5x).
+	- **Ultra**: No 5-hour limit at all.
+- **Weekly limits**: All paid Claude plans have a weekly limit. Claude Free does not technically have a weekly limit (the 5-hour limits and weaker models mean usage is sufficiently limited already), so if you're using Free, maxing out your 5-hour limit as frequently as possible is advised. Below is an estimation of paid plan usage limits, assuming Opus 5.5.
+	- **Pro**: ~50 games analysed.
+	- **Max**: ~250 games analysed (5x).
+	- **Ultra**: ~500 games analysed (10x).
+
+Unless you're doing heavy automation of the analysis process, it's very unlikely that you will be able to fully utilise the Max or Ultra plans, and we do not recommend them. Pro is sufficient for almost all use cases, only extremely heavily active scouts are likely to regularly hit its weekly limits.
+
+## Reverse engineering limitations
+
+Since 2 November 2026, Claude models have had tighter restrictions on "game cloning". Due to these restrictions, it is sometimes hesitant to crack encryption on files containing game assets. Notably, these limitations are not intended to block the task that we are performing, and as such Claude will only refuse to perform the task if it is framed in a way such that it seems like it might be someone trying to reframe asset ripping as a legitimate activity. The skill has wording to explicitly state its purpose and actions in a way that assuages concern about cracking encrypted files, but if you need to provide follow-up prompts your wording will also matter.
+
+Whenever asking Claude to decrypt a file through non-traditional methods (bytecode analysis, bruteforce, etcetera) always reiterate that this is for the sole purpose of verifying the achievement triggers, that extraction of audio/visual assets is not necessary or desired, and that only the analysis results need to be put in chat, not any of the extracted files.
+
+We have not had any analysis session fail on system-wide guardrail contraints with these instructions.
+
+## Weird quirks and edge cases
+
+Games with an emoji in their install directory path can not be accessed with the Filesystem tool. Their important files must be identified in advance and copied in by hand for Free plan users. Paid plan users can use the "Add folder" option from the "+" icon at the bottom left of the chat window to attach the folder in a way that it can be read and loaded like usual.
+
